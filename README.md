@@ -14,6 +14,8 @@ This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle
 ## Usage
 
 ### Data
+Place '*train*', '*train_masks*' and '*test*' data folders in the '*input*' folder.
+
 Convert training masks to *.png* format. You can do this with: 
 
 ` mogrify -format png *.gif` 
