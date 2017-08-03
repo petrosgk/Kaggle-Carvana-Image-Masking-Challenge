@@ -1,5 +1,5 @@
 # Kaggle Carvana Image Masking Challenge solution with Keras
-This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle.com/c/carvana-image-masking-challenge/discussion/37208). I kindly thank him for sharing his work. 128x128 and 512x512 U-nets are implemented.
+This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle.com/c/carvana-image-masking-challenge/discussion/37208). I kindly thank him for sharing his work. 128x128, 256x256 and 512x512 U-nets are implemented.
 
 ---
 
