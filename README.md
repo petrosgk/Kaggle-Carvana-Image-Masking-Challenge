@@ -27,3 +27,9 @@ Run `python train.py` to train from scratch. Alternatively download [pre-trained
 
 ### Test and submit
 Run `python test_submit.py` to make predictions on test data and generate submission.
+
+---
+
+### Losses
+![BCE_loss](loss.png)
+![dice_loss](dice_loss.png)
