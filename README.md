@@ -23,7 +23,7 @@ Convert training masks to *.png* format. You can do this with:
 in the '*train_masks*' data folder.
 
 ### Train
-Run `python train.py` to train from scratch. Alternatively download [pre-trained weights for 128x128 U-net](https://www.dropbox.com/s/7k2f734hxggyitb/best_weights.hdf5?dl=0) into '*weights*' folder.
+Run `python train.py` to train from scratch. Alternatively download [pre-trained weights for U-net_128](https://www.dropbox.com/s/7k2f734hxggyitb/best_weights.hdf5?dl=0) into '*weights*' folder.
 
 ### Test and submit
 Run `python test_submit.py` to make predictions on test data and generate submission.
