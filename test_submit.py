@@ -9,7 +9,7 @@ from u_net import get_unet_128, get_unet_256, get_unet_512
 df_test = pd.read_csv('input/sample_submission.csv')
 ids_test = df_test['img'].map(lambda s: s.split('.')[0])
 
-input_size = 256
+input_size = 128
 batch_size = 8
 
 orig_width = 1918
@@ -17,7 +17,7 @@ orig_height = 1280
 
 threshold = 0.5
 
-model = get_unet_256()
+model = get_unet_128()
 model.load_weights(filepath='weights/best_weights.hdf5')
 
 names = []
