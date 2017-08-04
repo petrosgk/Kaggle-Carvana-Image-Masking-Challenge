@@ -10,7 +10,7 @@ df_test = pd.read_csv('input/sample_submission.csv')
 ids_test = df_test['img'].map(lambda s: s.split('.')[0])
 
 input_size = 128
-batch_size = 8
+batch_size = 16
 
 orig_width = 1918
 orig_height = 1280
