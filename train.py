@@ -132,9 +132,9 @@ callbacks = [EarlyStopping(monitor='val_loss',
 model = get_unet_128()
 
 model.fit_generator(generator=train_generator(),
-                    steps_per_epoch=(len(ids_train_split) // batch_size) + 1,
+                    steps_per_epoch=np.ceil(float(len(ids_train_split)) / float(batch_size)),
                     epochs=epochs,
                     verbose=2,
                     callbacks=callbacks,
                     validation_data=valid_generator(),
-                    validation_steps=(len(ids_valid_split) // batch_size) + 1)
+                    validation_steps=np.ceil(float(len(ids_valid_split)) / float(batch_size)))
