@@ -37,6 +37,7 @@ def run_length_encode(mask):
     rle = ' '.join([str(r) for r in runs])
     return rle
 
+
 rles = []
 
 test_splits = 8  # Split test set (number of splits must be multiple of 2)
@@ -45,6 +46,7 @@ ids_test_splits = np.split(ids_test, indices_or_sections=test_splits)
 split_count = 0
 for ids_test_split in ids_test_splits:
     split_count += 1
+
 
     def test_generator():
         while True:
@@ -62,7 +64,7 @@ for ids_test_split in ids_test_splits:
 
     print("Predicting on {} samples (split {}/{})".format(len(ids_test_split), split_count, test_splits))
     preds = model.predict_generator(generator=test_generator(),
-                                    steps=(len(ids_test_split) // batch_size) + 1)
+                                    steps=np.ceil(float(len(ids_test_split)) / float(batch_size)))
     preds = np.squeeze(preds, axis=3)
 
     print("Generating masks...")
