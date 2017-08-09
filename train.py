@@ -1,13 +1,10 @@
-import pandas as pd
-import numpy as np
-
 import cv2
-
+import numpy as np
+import pandas as pd
+from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint, TensorBoard
 from sklearn.model_selection import train_test_split
 
-from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint, TensorBoard
-
-from u_net import get_unet_128, get_unet_256, get_unet_512
+from model.u_net import get_unet_128, get_unet_256, get_unet_512
 
 df_train = pd.read_csv('input/train_masks.csv')
 ids_train = df_train['img'].map(lambda s: s.split('.')[0])
@@ -115,18 +112,22 @@ def valid_generator():
             yield x_batch, y_batch
 
 
-callbacks = [EarlyStopping(monitor='val_loss',
-                           patience=4,
+callbacks = [EarlyStopping(monitor='val_dice_loss',
+                           patience=8,
                            verbose=1,
-                           min_delta=1e-4),
-             ReduceLROnPlateau(monitor='val_loss',
+                           min_delta=1e-4,
+                           mode='max'),
+             ReduceLROnPlateau(monitor='val_dice_loss',
                                factor=0.1,
-                               patience=2,
-                               cooldown=2,
-                               verbose=1),
-             ModelCheckpoint(filepath='weights/best_weights.hdf5',
+                               patience=4,
+                               verbose=1,
+                               epsilon=1e-4,
+                               mode='max'),
+             ModelCheckpoint(monitor='val_dice_loss',
+                             filepath='weights/best_weights.hdf5',
                              save_best_only=True,
-                             save_weights_only=True),
+                             save_weights_only=True,
+                             mode='max'),
              TensorBoard(log_dir='logs')]
 
 model = get_unet_128()
