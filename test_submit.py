@@ -1,10 +1,9 @@
-import pandas as pd
-import numpy as np
-
 import cv2
+import numpy as np
+import pandas as pd
 from tqdm import tqdm
 
-from u_net import get_unet_128, get_unet_256, get_unet_512
+from model.u_net import get_unet_128, get_unet_256, get_unet_512
 
 df_test = pd.read_csv('input/sample_submission.csv')
 ids_test = df_test['img'].map(lambda s: s.split('.')[0])
