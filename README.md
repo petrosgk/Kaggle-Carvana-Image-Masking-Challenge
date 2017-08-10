@@ -6,10 +6,15 @@ This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle
 | 128x128 | 0.990 |
 | 256x256 | 0.992 |
 | 512x512 | 0.995 |
+| 1024x1024 | 0.996 |
 
 ---
 
 ## Updates
+
+### Update 10.8.2017
+* Added 1024x1024 U-net
+* Not using *predict_generator* anymore due to memory constraints with large input.
 
 ### Update 9.8.2017
 * Using *Binary Crossentropy Dice Loss* in place of *Binary Crossentropy*
