@@ -4,7 +4,7 @@ import pandas as pd
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint, TensorBoard
 from sklearn.model_selection import train_test_split
 
-from model.u_net import get_unet_128, get_unet_256, get_unet_512
+from model.u_net import get_unet_128, get_unet_256, get_unet_512, get_unet_1024
 
 df_train = pd.read_csv('input/train_masks.csv')
 ids_train = df_train['img'].map(lambda s: s.split('.')[0])
