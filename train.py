@@ -4,20 +4,38 @@ import pandas as pd
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint, TensorBoard
 from sklearn.model_selection import train_test_split
 
-from model.u_net import get_unet_128, get_unet_256, get_unet_512, get_unet_1024
+import params
+
+input_size = params.input_size
+epochs = params.max_epochs
+batch_size = params.batch_size
+model = params.model
 
 df_train = pd.read_csv('input/train_masks.csv')
 ids_train = df_train['img'].map(lambda s: s.split('.')[0])
-
-input_size = 128
-
-epochs = 50
-batch_size = 16
 
 ids_train_split, ids_valid_split = train_test_split(ids_train, test_size=0.2, random_state=42)
 
 print('Training on {} samples'.format(len(ids_train_split)))
 print('Validating on {} samples'.format(len(ids_valid_split)))
+
+
+def randomHueSaturationValue(image, hue_shift_limit=(-180, 180),
+                             sat_shift_limit=(-255, 255),
+                             val_shift_limit=(-255, 255), u=0.5):
+    if np.random.random() < u:
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        h, s, v = cv2.split(image)
+        hue_shift = np.random.uniform(hue_shift_limit[0], hue_shift_limit[1])
+        h = cv2.add(h, hue_shift)
+        sat_shift = np.random.uniform(sat_shift_limit[0], sat_shift_limit[1])
+        s = cv2.add(s, sat_shift)
+        val_shift = np.random.uniform(val_shift_limit[0], val_shift_limit[1])
+        v = cv2.add(v, val_shift)
+        image = cv2.merge((h, s, v))
+        image = cv2.cvtColor(image, cv2.COLOR_HSV2BGR)
+
+    return image
 
 
 def randomShiftScaleRotate(image, mask,
@@ -79,6 +97,10 @@ def train_generator():
                 img = cv2.resize(img, (input_size, input_size))
                 mask = cv2.imread('input/train_masks/{}_mask.png'.format(id), cv2.IMREAD_GRAYSCALE)
                 mask = cv2.resize(mask, (input_size, input_size))
+                img = randomHueSaturationValue(img,
+                                               hue_shift_limit=(-50, 50),
+                                               sat_shift_limit=(-5, 5),
+                                               val_shift_limit=(-15, 15))
                 img, mask = randomShiftScaleRotate(img, mask,
                                                    shift_limit=(-0.0625, 0.0625),
                                                    scale_limit=(-0.1, 0.1),
@@ -129,8 +151,6 @@ callbacks = [EarlyStopping(monitor='val_dice_loss',
                              save_weights_only=True,
                              mode='max'),
              TensorBoard(log_dir='logs')]
-
-model = get_unet_128()
 
 model.fit_generator(generator=train_generator(),
                     steps_per_epoch=np.ceil(float(len(ids_train_split)) / float(batch_size)),
