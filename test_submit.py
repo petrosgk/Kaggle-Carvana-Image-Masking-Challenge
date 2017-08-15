@@ -3,21 +3,17 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from model.u_net import get_unet_128, get_unet_256, get_unet_512, get_unet_1024
+import params
+
+input_size = params.input_size
+batch_size = params.batch_size
+orig_width = params.orig_width
+orig_height = params.orig_height
+threshold = params.threshold
+model = params.model
 
 df_test = pd.read_csv('input/sample_submission.csv')
 ids_test = df_test['img'].map(lambda s: s.split('.')[0])
-
-input_size = 128
-batch_size = 16
-
-orig_width = 1918
-orig_height = 1280
-
-threshold = 0.5
-
-model = get_unet_128()
-model.load_weights(filepath='weights/best_weights.hdf5')
 
 names = []
 for id in ids_test:
@@ -38,6 +34,8 @@ def run_length_encode(mask):
 
 
 rles = []
+
+model.load_weights(filepath='weights/best_weights.hdf5')
 
 print('Predicting on {} samples with batch_size = {}...'.format(len(ids_test), batch_size))
 for start in tqdm(range(0, len(ids_test), batch_size)):
