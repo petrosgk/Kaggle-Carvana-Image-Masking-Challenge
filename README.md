@@ -12,9 +12,13 @@ This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle
 
 ## Updates
 
+### Update 15.8.2017
+* Switched to RMSprop optimizer as default.
+* Added multithreaded inference with inference and data loading done on separate threads. For me, this cut down inference time from ~3.5hrs to ~2.5hrs with 1024x1024 image size. You can run `test_submit_multithreaded.py` to test it.
+
 ### Update 10.8.2017
 * Added 1024x1024 U-net
-* Not using *predict_generator* anymore due to memory constraints with large input.
+* Not using *predict_generator* anymore due to memory constraints with large input
 
 ### Update 9.8.2017
 * Using *Binary Crossentropy Dice Loss* in place of *Binary Crossentropy*
