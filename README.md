@@ -14,7 +14,7 @@ This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle
 
 ### Update 15.8.2017
 * Switched to RMSprop optimizer as default.
-* Added multithreaded inference with inference and data loading done on separate threads. For me, this cut down inference time from ~3.5hrs to ~2.5hrs with 1024x1024 image size. You can run `test_submit_multithreaded.py` to test it.
+* Added multithreaded inference with inference and data loading done on separate threads. This reduced inference time by 40% in my tests. You can run `test_submit_multithreaded.py` to try it.
 
 ### Update 10.8.2017
 * Added 1024x1024 U-net
