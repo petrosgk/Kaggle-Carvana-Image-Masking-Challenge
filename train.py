@@ -9,7 +9,7 @@ import params
 input_size = params.input_size
 epochs = params.max_epochs
 batch_size = params.batch_size
-model = params.model
+model = params.model_factory()
 
 df_train = pd.read_csv('input/train_masks.csv')
 ids_train = df_train['img'].map(lambda s: s.split('.')[0])

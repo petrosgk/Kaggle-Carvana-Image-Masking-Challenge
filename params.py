@@ -10,4 +10,4 @@ orig_height = 1280
 
 threshold = 0.5
 
-model = get_unet_128()
+model_factory = get_unet_128
