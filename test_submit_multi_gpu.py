@@ -81,7 +81,8 @@ def predictor(q, gpu):
                     prob = pred
                 mask = prob > threshold
                 rle = run_length_encode(mask)
-                rles.append(rle)
+                id = ids.iloc[i]
+                rles.append((id, rle))
 
 
 
@@ -102,5 +103,6 @@ for t in threads:
     t.join()
 
 print("Generating submission file...")
-df = pd.DataFrame({'img': names, 'rle_mask': rles})
+df = pd.DataFrame(rles, columns=['img', 'rle_mask'])
+df['img'] += '.jpg'
 df.to_csv('submit/submission.csv.gz', index=False, compression='gzip')
