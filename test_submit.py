@@ -10,7 +10,7 @@ batch_size = params.batch_size
 orig_width = params.orig_width
 orig_height = params.orig_height
 threshold = params.threshold
-model = params.model
+model = params.model_factory()
 
 df_test = pd.read_csv('input/sample_submission.csv')
 ids_test = df_test['img'].map(lambda s: s.split('.')[0])
