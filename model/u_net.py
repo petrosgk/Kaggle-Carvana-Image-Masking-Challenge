@@ -2,7 +2,7 @@ from keras.models import Model
 from keras.layers import Input, concatenate, Conv2D, MaxPooling2D, Activation, UpSampling2D, BatchNormalization
 from keras.optimizers import RMSprop
 
-from model.losses import bce_dice_loss, dice_coeff
+from model.losses import bce_dice_loss, dice_loss, weighted_bce_dice_loss, weighted_dice_loss, dice_coeff
 
 
 def get_unet_128(input_shape=(128, 128, 3),
