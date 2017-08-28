@@ -12,6 +12,9 @@ This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle
 
 ## Updates
 
+### Update 28.8.2017
+* Added loss with weighted boundary (thanks to [lyakaap](https://www.kaggle.com/lyakaap/weighing-boundary-pixels-loss-script-by-keras2))
+
 ### Update 15.8.2017
 * Added Hue/Saturation/Value augmentation.
 * Switched to RMSprop optimizer as default.
