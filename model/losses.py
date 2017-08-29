@@ -38,7 +38,7 @@ def weighted_dice_loss(y_true, y_pred):
     elif K.int_shape(y_pred[0]) == 256:
         kernel_size = 21
     elif K.int_shape(y_pred[0]) == 512:
-        kernel_size = 31
+        kernel_size = 21
     elif K.int_shape(y_pred[0]) == 1024:
         kernel_size = 41
     else:
@@ -76,7 +76,7 @@ def weighted_bce_dice_loss(y_true, y_pred):
     elif K.int_shape(y_pred[0]) == 256:
         kernel_size = 21
     elif K.int_shape(y_pred[0]) == 512:
-        kernel_size = 31
+        kernel_size = 21
     elif K.int_shape(y_pred[0]) == 1024:
         kernel_size = 41
     else:
