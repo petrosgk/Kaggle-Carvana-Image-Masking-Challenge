@@ -134,18 +134,18 @@ def valid_generator():
             yield x_batch, y_batch
 
 
-callbacks = [EarlyStopping(monitor='val_dice_loss',
+callbacks = [EarlyStopping(monitor='val_loss',
                            patience=8,
                            verbose=1,
                            min_delta=1e-4,
                            mode='max'),
-             ReduceLROnPlateau(monitor='val_dice_loss',
+             ReduceLROnPlateau(monitor='val_loss',
                                factor=0.1,
                                patience=4,
                                verbose=1,
                                epsilon=1e-4,
                                mode='max'),
-             ModelCheckpoint(monitor='val_dice_loss',
+             ModelCheckpoint(monitor='val_loss',
                              filepath='weights/best_weights.hdf5',
                              save_best_only=True,
                              save_weights_only=True,
