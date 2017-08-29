@@ -33,13 +33,13 @@ def weighted_dice_loss(y_true, y_pred):
     y_true = K.cast(y_true, 'float32')
     y_pred = K.cast(y_pred, 'float32')
     # if we want to get same size of output, kernel size must be odd number
-    if K.int_shape(y_pred)[0] == 128:
+    if K.int_shape(y_pred)[1] == 128:
         kernel_size = 11
-    elif K.int_shape(y_pred[0]) == 256:
+    elif K.int_shape(y_pred)[1] == 256:
         kernel_size = 21
-    elif K.int_shape(y_pred[0]) == 512:
+    elif K.int_shape(y_pred)[1] == 512:
         kernel_size = 21
-    elif K.int_shape(y_pred[0]) == 1024:
+    elif K.int_shape(y_pred)[1] == 1024:
         kernel_size = 41
     else:
         raise ValueError('Unexpected image size')
@@ -71,13 +71,13 @@ def weighted_bce_dice_loss(y_true, y_pred):
     y_true = K.cast(y_true, 'float32')
     y_pred = K.cast(y_pred, 'float32')
     # if we want to get same size of output, kernel size must be odd number
-    if K.int_shape(y_pred)[0] == 128:
+    if K.int_shape(y_pred)[1] == 128:
         kernel_size = 11
-    elif K.int_shape(y_pred[0]) == 256:
+    elif K.int_shape(y_pred)[1] == 256:
         kernel_size = 21
-    elif K.int_shape(y_pred[0]) == 512:
+    elif K.int_shape(y_pred)[1] == 512:
         kernel_size = 21
-    elif K.int_shape(y_pred[0]) == 1024:
+    elif K.int_shape(y_pred)[1] == 1024:
         kernel_size = 41
     else:
         raise ValueError('Unexpected image size')
