@@ -35,6 +35,7 @@ This solution was based on [Heng CherKeng's code for PyTorch](https://www.kaggle
 * sklearn
 * cv2
 * tqdm
+* h5py
 
 ---
 
