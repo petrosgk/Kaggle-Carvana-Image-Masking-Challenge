@@ -1,0 +1,6 @@
+tensorflow
+keras
+sklearn
+opencv-python
+tqdm
+h5py
